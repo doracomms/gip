@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grow in Private — Newsletter của Dora</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --cream-dark: #EDE8DF;
+    --olive: #5C6B3A;
+    --olive-light: #7A8B50;
+    --olive-pale: #E8EDD9;
+    --ink: #2C2A22;
+    --ink-mid: #5A5850;
+    --ink-light: #8A887E;
+    --rust: #A0522D;
+    --border: rgba(92,107,58,0.2);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(245,240,232,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-brand {
+    font-family: 'Lora', serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--olive);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--olive);
+    text-decoration: none;
+    border: 1px solid var(--olive);
+    padding: 7px 18px;
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--olive); color: var(--cream); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 5vw 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -80px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(92,107,58,0.12);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -40px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(92,107,58,0.08);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--olive);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.1s forwards;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--olive);
+  }
+
+  .hero-headline {
+    font-family: 'Lora', serif;
+    font-size: clamp(36px, 5vw, 68px);
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--ink);
+    max-width: 960px;
+    white-space: nowrap;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s forwards;
+  }
+  @media (max-width: 900px) {
+    .hero-headline { white-space: normal; font-size: clamp(28px, 6vw, 48px); }
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--olive);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ink-mid);
+    max-width: 540px;
+    margin-bottom: 48px;
+    line-height: 1.65;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.35s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.45s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--olive);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 16px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.25s;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-primary:hover {
+    background: var(--ink);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(44,42,34,0.18);
+  }
+  .btn-primary .arrow { transition: transform 0.2s; }
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+
+  .hero-note {
+    font-size: 13px;
+    color: var(--ink-light);
+  }
+
+  .hero-bonus {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--olive-pale);
+    border: 1px solid rgba(92,107,58,0.3);
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: var(--ink-mid);
+    margin-bottom: 28px;
+    width: fit-content;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s forwards;
+  }
+  .hero-bonus strong { color: var(--olive); font-weight: 500; }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 5vw;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    opacity: 0;
+    animation: fadeUp 0.7s 0.8s forwards;
+  }
+  .scroll-line {
+    width: 40px; height: 1px;
+    background: var(--ink-light);
+    position: relative;
+    overflow: hidden;
+  }
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    left: -100%; top: 0;
+    width: 100%; height: 100%;
+    background: var(--olive);
+    animation: slide 1.8s ease-in-out infinite;
+  }
+
+  /* ─── WHAT IS GIP ─── */
+  .section { padding: 100px 5vw; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 56px;
+  }
+  .divider-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    white-space: nowrap;
+  }
+  .divider-line {
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .intro-left h2 {
+    font-family: 'Lora', serif;
+    font-size: clamp(30px, 3.5vw, 44px);
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .intro-left h2 em { font-style: italic; color: var(--olive); }
+  .intro-left p {
+    font-size: 16px;
+    color: var(--ink-mid);
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .intro-right {
+    background: var(--cream-dark);
+    border-radius: 16px;
+    padding: 36px;
+    border: 0.5px solid var(--border);
+    position: relative;
+  }
+  .intro-right::before {
+    content: '"';
+    font-family: 'Lora', serif;
+    font-size: 80px;
+    color: var(--olive-pale);
+    position: absolute;
+    top: 16px; left: 28px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .quote-text {
+    font-family: 'Lora', serif;
+    font-size: 19px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 20px;
+    padding-top: 20px;
+  }
+  .quote-from {
+    font-size: 13px;
+    color: var(--ink-light);
+  }
+  .quote-from span { color: var(--olive); font-weight: 500; }
+
+  /* ─── 4 SECTIONS ─── */
+  .sections-bg {
+    background: var(--cream-dark);
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .section-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .sc-card {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 32px 36px;
+    border: 0.5px solid var(--border);
+    transition: transform 0.2s;
+  }
+  .sc-card:hover { transform: translateY(-4px); }
+  .sc-number {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--olive);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .sc-title {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .sc-title em { font-style: italic; }
+  .sc-desc {
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+
+  /* ─── FOR WHO ─── */
+  .forwho-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .forwho-headline {
+    font-family: 'Lora', serif;
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+  .forwho-headline em { font-style: italic; color: var(--olive); }
+
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .check-list li {
+    display: flex;
+    gap: 14px;
+    font-size: 16px;
+    color: var(--ink-mid);
+    line-height: 1.55;
+    align-items: flex-start;
+  }
+  .check-list li::before {
+    content: '→';
+    color: var(--olive);
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .notfor-box {
+    background: var(--olive-pale);
+    border-radius: 12px;
+    padding: 28px 32px;
+    border: 0.5px solid rgba(92,107,58,0.25);
+  }
+  .notfor-box h4 {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--olive);
+    margin-bottom: 16px;
+  }
+  .notfor-box ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .notfor-box ul li {
+    font-size: 15px;
+    color: var(--ink-mid);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .notfor-box ul li::before {
+    content: '×';
+    color: var(--rust);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  /* ─── PRICING ─── */
+  .pricing-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .pricing-wrap h2 {
+    font-family: 'Lora', serif;
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .pricing-wrap h2 em { font-style: italic; color: var(--olive); }
+  .pricing-wrap .sub {
+    font-size: 16px;
+    color: var(--ink-mid);
+    margin-bottom: 48px;
+  }
+
+  .price-card {
+    background: var(--cream-dark);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px;
+    text-align: left;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .price-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--olive);
+  }
+  .price-badge {
+    display: inline-block;
+    background: var(--olive-pale);
+    color: var(--olive);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    border: 0.5px solid rgba(92,107,58,0.3);
+  }
+  .price-amount {
+    font-family: 'Lora', serif;
+    font-size: 52px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .price-amount span {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ink-mid);
+  }
+  .price-period {
+    font-size: 14px;
+    color: var(--ink-light);
+    margin-bottom: 28px;
+  }
+  .price-includes {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .price-includes li {
+    display: flex;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--ink-mid);
+    align-items: flex-start;
+  }
+  .price-includes li::before {
+    content: '✓';
+    color: var(--olive);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  /* ─── ABOUT DORA ─── */
+  .about-bg { background: var(--olive); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .about-avatar {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lora', serif;
+    font-size: 48px;
+    color: var(--cream);
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.25);
+  }
+  .about-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.6);
+    margin-bottom: 12px;
+  }
+  .about-name {
+    font-family: 'Lora', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+  .about-bio {
+    font-size: 16px;
+    color: rgba(245,240,232,0.8);
+    line-height: 1.75;
+    max-width: 580px;
+  }
+  .about-bio strong { color: var(--cream); font-weight: 500; }
+
+  /* ─── FINAL CTA ─── */
+  .final-cta {
+    text-align: center;
+    padding: 120px 5vw;
+  }
+  .final-cta h2 {
+    font-family: 'Lora', serif;
+    font-size: clamp(36px, 5vw, 62px);
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .final-cta h2 em { font-style: italic; color: var(--olive); }
+  .final-cta p {
+    font-size: 17px;
+    color: var(--ink-mid);
+    max-width: 480px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 32px 5vw;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer .brand {
+    font-family: 'Lora', serif;
+    font-size: 14px;
+    color: var(--olive);
+  }
+  footer .links {
+    display: flex;
+    gap: 24px;
+  }
+  footer .links a {
+    font-size: 13px;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer .links a:hover { color: var(--olive); }
+  footer .copy {
+    font-size: 12px;
+    color: var(--ink-light);
+  }
+
+  .price-includes li.bonus-item {
+    border-top: 0.5px solid var(--border);
+    padding-top: 14px;
+    margin-top: 4px;
+    color: var(--ink);
+  }
+  .price-includes li.bonus-item::before { content: '🎁'; }
+  .price-includes li.bonus-item strong { color: var(--olive); font-weight: 500; }
+  .bonus-tag {
+    display: inline-block;
+    background: var(--olive);
+    color: var(--cream);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .email-card {
+    background: var(--cream);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    box-shadow: 0 1px 3px rgba(44,42,34,0.06);
+  }
+  .email-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .email-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .email-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .email-meta {
+    font-size: 12px;
+    color: var(--ink-light);
+    margin-top: 2px;
+  }
+  .email-body {
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.75;
+  }
+  .email-body mark {
+    background: rgba(250,199,117,0.4);
+    color: var(--ink);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  @media (max-width: 900px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .intro-grid,
+    .section-cards,
+    .forwho-grid,
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+
+    .hero-headline { font-size: 42px; }
+    .about-avatar { width: 100px; height: 100px; font-size: 32px; }
+    .price-card { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">Grow in Private</a>
+  <a class="nav-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSfLlHGtbgo-UV1MGkkLTu9bCpwb32Q7tOuCC96fGiEOC2CKLw/viewform" target="_blank">Đăng ký ngay</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-tag">Newsletter hàng tuần · @bydoracomms</p>
+  <h1 class="hero-headline">
+    Làm content cho THCN<br>
+    <em>không ồn ào, cùng nhau.</em>
+  </h1>
+  <p class="hero-sub">
+    Mỗi tuần một bản tin — câu chuyện thật, bài học thực tế, và một writing prompt để bạn tự luyện.
+    Dành cho người đang grow in private.
+  </p>
+  <div class="hero-bonus">
+    <span class="bonus-icon">🎁</span>
+    <span>Đăng ký ngay hôm nay — nhận ngay <strong>150 Viral Content Ideas</strong> miễn phí</span>
+  </div>
+  <div class="hero-actions">
+    <a class="btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfLlHGtbgo-UV1MGkkLTu9bCpwb32Q7tOuCC96fGiEOC2CKLw/viewform" target="_blank">
+      Tham gia GIP
+      <span class="arrow">→</span>
+    </a>
+    <span class="hero-note">Bản tin trả phí · Ra hàng tuần</span>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    cuộn xuống để biết thêm
+  </div>
+</section>
+
+<!-- WHAT IS GIP -->
+<section class="section">
+  <div class="section-inner">
+    <div class="divider">
+      <span class="divider-label">GIP là gì</span>
+      <div class="divider-line"></div>
+    </div>
+    <div class="intro-grid">
+      <div class="intro-left">
+        <h2>Không phải tips.<br><em>Là trải nghiệm thật.</em></h2>
+        <p>
+          GIP — Grow in Private — là bản tin email hàng tuần, không phải một blog hay podcast, càng không phải một "khoá học".
+        </p>
+        <p>
+          Mỗi số GIP là câu chuyện đang diễn ra trong cuộc sống của mình —
+          công việc full-time, nuôi con, xây thương hiệu —
+          kèm bài học thực tế và một prompt để bạn tự luyện viết.
+        </p>
+        <p>
+          Mình đã sai, để bạn... sai ít hơn :D.<br>Mình đã đúng, để bạn đúng nhanh hơn.
+        </p>
+      </div>
+      <div class="intro-right">
+        <p class="quote-text">
+          "Giống như bạn, mình cũng đang xây THCN của mình, trong lúc vẫn đang làm một công việc full time. Mình tin những gì đã hiệu quả với mình, sẽ giúp bạn tiết kiệm 10s giờ thử-và-sai."
+        </p>
+        <p class="quote-from">— Dora · <span>@bydoracomms</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 PHẦN MỖI SỐ -->
+<section class="section sections-bg">
+  <div class="section-inner">
+    <div class="divider">
+      <span class="divider-label">Mỗi số GIP gồm 4 phần</span>
+      <div class="divider-line"></div>
+    </div>
+    <div class="section-cards">
+      <div class="sc-card">
+        <p class="sc-number">01 · Behind the Scene</p>
+        <h3 class="sc-title"><em>Câu chuyện</em> tuần này</h3>
+        <p class="sc-desc">Đúc rút từ trải nghiệm thực tế của mình trong tuần đó — khi làm content cho thương hiệu cá nhân để kiếm tiền. Không phải lý thuyết. Là chuyện đang xảy ra. Như chuyện mình bị mất tài khoản IG 75.1k followers chẳng hạn.</p>
+      </div>
+      <div class="sc-card">
+        <p class="sc-number">02 · What I'm Studying</p>
+        <h3 class="sc-title">Mình đang <em>học gì</em></h3>
+        <p class="sc-desc">Framework, sách, concept, hoặc người mình đang nghiên cứu — liên quan trực tiếp đến câu chuyện tuần đó. Có chiều sâu, có thể áp dụng được.</p>
+      </div>
+      <div class="sc-card">
+        <p class="sc-number">03 · One Writing Prompt</p>
+        <h3 class="sc-title">Một <em>writing prompt</em> thực hành</h3>
+        <p class="sc-desc">Làm được trong 10–15 phút. Cụ thể, có gợi ý triển khai. Dùng cho social hoặc chỉ viết cho bản thân cũng được.</p>
+      </div>
+      <div class="sc-card">
+        <p class="sc-number">04 · Cho mình 10 phút</p>
+        <h3 class="sc-title">Trả lời <em>câu hỏi</em> của bạn</h3>
+        <p class="sc-desc">Mỗi số mình trả lời một câu hỏi reader gửi về. Ngắn gọn, thực tế, dựa trên kinh nghiệm thật — như reply email của bạn thân.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="section">
+  <div class="section-inner">
+    <div class="divider">
+      <span class="divider-label">GIP dành cho ai</span>
+      <div class="divider-line"></div>
+    </div>
+    <div class="forwho-grid">
+      <div>
+        <h2 class="forwho-headline">Bạn đang xây<br><em>một cách lặng lẽ</em>?</h2>
+        <ul class="check-list">
+          <li>Đang xây personal brand hoặc solopreneur business — chưa muốn ồn ào</li>
+          <li>Muốn học cách viết content từ trải nghiệm thật của bản thân</li>
+          <li>Làm freelance, content, copywriting, hoặc sáng tạo nói chung</li>
+          <li>Cần ý tưởng thực tế, không phải lý thuyết hoa mỹ</li>
+          <li>Muốn có một người chia sẻ hành trình — không phải coach hay guru</li>
+        </ul>
+      </div>
+      <div>
+        <div class="notfor-box">
+          <h4>GIP không dành cho bạn nếu</h4>
+          <ul>
+            <li>Bạn đang tìm tips viral hay hack tăng follower nhanh</li>
+            <li>Bạn muốn template copy-paste mà không cần hiểu</li>
+            <li>Bạn chỉ muốn đọc cho vui, không có kế hoạch áp dụng</li>
+            <li>Bạn kỳ vọng kết quả chỉ sau 2–3 số đọc</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section sections-bg">
+  <div class="section-inner">
+    <div class="divider">
+      <span class="divider-label">Tham gia</span>
+      <div class="divider-line"></div>
+    </div>
+    <div class="pricing-wrap">
+      <h2>Một quyết định <em>nhỏ</em>,<br>mỗi tuần.</h2>
+      <p class="sub">Đăng ký một lần, nhận bản tin mỗi tuần — thẳng vào hộp thư của bạn.</p>
+      <div class="price-card">
+        <span class="price-badge">Thành viên GIP</span>
+        <div class="price-amount">Paid <span>newsletter</span></div>
+        <p class="price-period">Gửi vào trưa thứ 7 hằng tuần</p>
+        <ul class="price-includes">
+          <li>Bản tin hàng tuần — 4 phần, đầy đủ nội dung</li>
+          <li>Các buổi thực hành viết theo nhóm theo các chủ đề khác nhau</li>
+          <li>Một chiếc vibe "mình làm được" — mà không cần hô hào, ồn ào :D</li>
+          <li>Có thể gửi câu hỏi cho phần "Cho mình 10 phút"</li>
+          <li>Nội dung tích luỹ theo thời gian — bạn vào từ thời điểm nào, tụi mình sẽ cùng nhau "grow" từ thời điểm đó.</li>
+          <li class="bonus-item"><span class="bonus-tag">Bonus</span> Nhận ngay <strong>150 Viral Content Ideas</strong> khi đăng ký</li>
+        </ul>
+        <a class="btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfLlHGtbgo-UV1MGkkLTu9bCpwb32Q7tOuCC96fGiEOC2CKLw/viewform" target="_blank" style="width: 100%; justify-content: center;">
+          Đăng ký GIP ngay
+          <span class="arrow">→</span>
+        </a>
+      </div>
+      <p style="font-size: 13px; color: var(--ink-light);">Điền form → tham gia ngay và nhận <strong style="color:var(--olive)">150 Viral Content Ideas</strong> trong hộp thư.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT DORA -->
+<section class="section about-bg">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-avatar">D</div>
+      <div>
+        <p class="about-tag">Người viết GIP</p>
+        <h2 class="about-name">Dora · @bydoracomms</h2>
+        <p class="about-bio">
+          Mình là copywriter làm full-time cho công ty Singapore, đồng thời giảng dạy môn
+          <strong>Viết trong Truyền thông</strong> tại trường đại học và tự xây dựng thương hiệu cá nhân.
+          <br><br>
+          Là mẹ của ba đứa con nhỏ, introvert, và người tin rằng <strong>personal brand không cần phải ồn ào</strong> —
+          chỉ cần nhất quán và thật.
+          <br><br>
+          GIP là nơi mình chia sẻ những thứ đang xảy ra — không phải những thứ đã hoàn hảo.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="divider">
+      <span class="divider-label">Reader nói gì về GIP</span>
+      <div class="divider-line"></div>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="email-card">
+        <div class="email-header">
+          <div class="email-avatar" style="background:#D4E8C2;color:#3A5A1A">TT</div>
+          <div>
+            <p class="email-name">Thu Thuỷ</p>
+            <p class="email-meta">to me · 28 Feb</p>
+          </div>
+        </div>
+        <p class="email-body">Đóng có khoảng <mark>170k/tháng</mark> mà mỗi tuần nhận được <mark>1 email cực hay</mark> + tham gia miễn phí workshop siêu chất lượng thế này thì <mark>quá hời</mark>, quá chất lượng luôn chị ạ. Đọc prompt thôi mà <mark>siêu xịn xò</mark> luôn a. Lại chia ra từng bước nhỏ, <mark>rất cụ thể và dễ thực hiện</mark> nữa a.</p>
+      </div>
+
+      <div class="email-card">
+        <div class="email-header">
+          <div class="email-avatar" style="background:#C2D4E8;color:#1A3A5A">TB</div>
+          <div>
+            <p class="email-name">Thanh Bình Đào</p>
+            <p class="email-meta">to me · 2 Mar</p>
+          </div>
+        </div>
+        <p class="email-body">Cảm ơn chị Dora vì 1 <mark>buổi thực hành siêu siêu hay</mark>. Em đã <mark>áp dụng</mark> những gì chị dạy ngay sau buổi thực hành và em có luôn <mark>1 bài viral</mark> trên Threads (thiệt sự là omg luôn chị ơi). Biết ơn chị Dora thật nhiều.</p>
+      </div>
+
+      <div class="email-card">
+        <div class="email-header">
+          <div class="email-avatar" style="background:#E8D4C2;color:#5A3A1A">HL</div>
+          <div>
+            <p class="email-name">Chị Linh</p>
+            <p class="email-meta">to me · 15 Jan</p>
+          </div>
+        </div>
+        <p class="email-body">Chị thấy Thuỷ khen bản tin của em nên đã đặt ngay để <mark>đồng hành cùng em trong 6 tháng</mark> tới. Cảm ơn em vì đã luôn <mark>hoạt động rất năng suất</mark> và mang đến <mark>nhiều cảm hứng</mark> cho chị. Chị rất chờ được <mark>đón đọc mỗi thứ 7</mark> hàng tuần. Yêu mến.</p>
+      </div>
+
+      <div class="email-card">
+        <div class="email-header">
+          <div class="email-avatar" style="background:#E8E2C2;color:#5A4E1A">SS</div>
+          <div>
+            <p class="email-name">Sói Sơn</p>
+            <p class="email-meta">to me · 24 Jan</p>
+          </div>
+        </div>
+        <p class="email-body">Phần chia sẻ của chị <mark>sáng hay</mark> thực sự giúp em <mark>khai thông được điểm tắc</mark> trong việc viết của mình. Bên cạnh đó cảm ơn chị đã giúp em hiểu cách mình sẽ đi ra sao nếu không thật sự biết mình giỏi điều gì — từ đó em tự hỏi: <mark>"Vậy tại sao mình không viết về điều này?"</mark> Có 1 điều lạ, từ lúc em quyết định viết này, <mark>hàng loạt ý tưởng sản phẩm đã hiện ra trong đầu.</mark></p>
+      </div>
+
+      <div class="email-card">
+        <div class="email-header">
+          <div class="email-avatar" style="background:#C2E8D8;color:#1A5A3A">YN</div>
+          <div>
+            <p class="email-name">Yến</p>
+            <p class="email-meta">to me · 2 Mar</p>
+          </div>
+        </div>
+        <p class="email-body">Nhờ email tuần trước của chị, em đã <mark>sắp xếp lại não</mark>, phân loại emails vào danh mục theo chủ đề và cũng từ đó <mark>cái idea kia ra đời</mark>. file The New Identity em còn in ra để ở mặt bàn đọc như bible luôn :))) em không biết chị <mark>lãi lời</mark> bao nhiêu làm Grow In Private, nhưng em thấy em lời đủ luôn :D</p>
+      </div>
+
+      <div class="email-card">
+        <div class="email-header">
+          <div class="email-avatar" style="background:#E8C2D4;color:#5A1A3A">HD</div>
+          <div>
+            <p class="email-name">Hà Đặng</p>
+            <p class="email-meta">to me · 2 Mar</p>
+          </div>
+        </div>
+        <p class="email-body">Mấy hôm nay em đang nhiều việc quá nên chưa dành thời gian để viết chi tiết cảm ơn c Dora về buổi thực hành thứ 7 vừa rồi đc. Hôm nay mở top top ra thấy bài đăng nhờ buổi thực hành với chị hôm đó — <mark>em dùng chat GPT viết và đăng lên — nay viral</mark> và <mark>nhận được nhiều inbox quả trời</mark> rồi a. Biết ơn sự tận tình và tâm huyết của chị ❤️</p>
+      </div>
+
+      <div class="email-card">
+        <div class="email-header">
+          <div class="email-avatar" style="background:#C2D4E8;color:#1A3A5A">AN</div>
+          <div>
+            <p class="email-name">Anh Nguyen</p>
+            <p class="email-meta">to me · 1 Feb</p>
+          </div>
+        </div>
+        <p class="email-body">Em gửi bài tập sau một tuần nghiên cứu, sau khi hoàn thiện xong bài viết thì em quyết định <mark>cắt bỏ não overthinking</mark> của em đi và đã đăng luôn trên Substack. Em rất thích bài tập tuần này — mục tiêu của em sẽ là <mark>đăng mỗi tuần</mark>.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>Tuần tới bạn muốn<br>đọc <em>gì trong hộp thư</em>?</h2>
+  <p>Tham gia GIP — nhận bản tin thật, từ người đang thật sự xây dựng.</p>
+  <a class="btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfLlHGtbgo-UV1MGkkLTu9bCpwb32Q7tOuCC96fGiEOC2CKLw/viewform" target="_blank" style="margin: 0 auto;">
+    Tham gia Grow in Private
+    <span class="arrow">→</span>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="brand">Grow in Private · @bydoracomms</span>
+  <div class="links">
+    <a href="https://www.facebook.com/doracomms" target="_blank">Facebook</a>
+    <a href="https://www.instagram.com/bydoracomms" target="_blank">Instagram</a>
+  </div>
+  <span class="copy">© 2026 Doracomms</span>
+</footer>
+
+</body>
+</html>
